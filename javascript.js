@@ -2,7 +2,6 @@ $(document).ready(function() {
 
   var searchInput = document.querySelector('.form-control');
   var cityText = document.querySelector('#city');
-  var iconText = document.querySelector('#icon');
   var tempText = document.querySelector('#temp');
   var humidityText = document.querySelector('#humidity');
   var windSpeedText = document.querySelector('#windSpeed');
@@ -11,7 +10,7 @@ $(document).ready(function() {
 
 $("#search-button").on("click", function() {
 //take the input from the search bar and fetch the data from open weather
-console.log(searchInput.value);
+//console.log(searchInput.value);
 //present todays weather data for specific city in the today card
 fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
     .then(response => response.json())
@@ -26,19 +25,27 @@ fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + 
 
     cityText.textContent = cityVal;
     $('#iconPNG').attr('src', iconLink);
-    tempText.textContent = "Tempature: " + tempVal + "° F";
+    tempText.textContent = "Temperature: " + tempVal + "° F";
     humidityText.textContent = "Humidity: " + humidityVal + "%";
     windSpeedText.textContent = "Wind Speed: " + windSpeedVal + " MPH";
-
     })
 
-
 //present 5 day forecast in forecast card
+    fetch('http://api.openweathermap.org/data/2.5/forecast/onecall?q=' + searchInput.value + '&cnt=4&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    // .then(data => {
+    //   // the date, an icon representation of weather conditions, the temperature, and the humidity
+    //   var date = 
+    //   var icon5 = 
+    //   var temp5 =
+    //   var hum5 = 
+    // 
+  })
 
 //store search history
 
 //append search history in aside
-
 
 //make search history clickable to bring up the forecast 
 
@@ -46,4 +53,4 @@ fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + 
 
 })
 
-})
+

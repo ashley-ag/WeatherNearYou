@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>Weather Dashboard</title>
 </head>
@@ -29,6 +30,7 @@
         <ul class="list-group history"></ul>
       </aside>
 
+
       <div class="col-lg-9">
         <div class="card">
           <div class="card-header">
@@ -36,25 +38,26 @@
           </div>
           <div class="card-body mt-3" id="today">
             <!-- city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index -->
-            <p id="city"></p>
-            <p id="icon"><img id="iconPNG" src=""></p>
-            <p id="temp"></p>
-            <p id="humidity"></p>
-            <p id="windSpeed"></p>
-            <p id="UVIndex"></p>
+            <p class="text-center font-weight-bold h1" id="city"></p>
+            <p class="text-center" id="icon"><img id="iconPNG" src=""></p>
+            <p class="text-center h3" id="temp"></p>
+            <p class="text-center h3" id="humidity"></p>
+            <p class="text-center h3" id="windSpeed"></p>
+            <p class="text-center h3" id="UVIndex"></p>
           </div>
         </div>
+        
         <div class="card">
           <div class="card-header">
             5-day Forecast
           </div>
-          <div class="card-body mt-3" id="forecast">
+  <div class="card-body mt-3" id="forecast">
+
           </div>
         </div>
         </div>
       </div>
     </div>
-  </div>
 
   <script src="./javascript.js"></script>
 
