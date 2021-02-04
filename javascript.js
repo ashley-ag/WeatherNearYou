@@ -10,16 +10,34 @@ $(document).ready(function() {
   var citySearch = [];
 
  
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 $("#search-button").on("click", function() {
-
   displayWeatherData();
-
 })
 
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+// local storage and history buttons
+
+function localStorageHistory() {
+  citySearch.push(searchInput.value);
+  localStorage.setItem("cities", JSON.stringify(citySearch));
+
+  for(i=0; i < 5; i++) {
+
+
+  }
+
+}
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+//Populate weather data and the forecast data
 
 function displayWeatherData() {
   fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
@@ -76,4 +94,8 @@ fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + l
 
 
 
+
+
+
+//doc ready closing 
 })
