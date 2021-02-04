@@ -1,108 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Weather Dashboard</title>
+  </head>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <title>Weather Dashboard</title>
-</head>
+  <body>
+    <header class="container-fluid text-center text-white bg-dark p-2">
+      <h1>Weather Dashboard</h1>
+    </header>
 
-<body>
-  <header class="container-fluid text-center text-white bg-dark p-2">
-    <h1>Weather Dashboard</h1>
-  </header>
-
-  <div class="container-fluid">
-    <div class="row">
-      <aside class="col-lg-3 bg-light">
-        <h5 class="mt-1">Search for a City:</h5>
-        <div class="form-inline form-group">
-          <input class="form-control" type="text" id="search-value"/>
-          <button class="btn btn-primary" id="search-button"> <i class="fa fa-search"></i> </button>
-        </div>
-
-        <ul class="list-group history"></ul>
-      </aside>
-
-
-      <div class="col-lg-9">
-        <div class="card">
-          <div class="card-header">
-            Today's Forecast
+    <div class="container-fluid">
+      <div class="row">
+        <aside class="col-lg-3 bg-light">
+          <h5 class="mt-1">Search for a City:</h5>
+          <div class="form-inline form-group">
+            <input class="form-control" type="text" id="search-value" />
+            <button class="btn btn-primary" id="search-button">
+              <i class="fa fa-search"></i>
+            </button>
           </div>
-          <div class="card-body mt-3" id="today">
-            <!-- city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index -->
-            <p class="text-center font-weight-bold h1" id="city"></p>
-            <p class="text-center" id="icon"><img id="iconPNG" src=""></p>
-            <p class="text-center h3" id="temp"></p>
-            <p class="text-center h3" id="humidity"></p>
-            <p class="text-center h3" id="windSpeed"></p>
-            <p class="text-center h3" id="UVIndex"><span id="UVInumber"></span></p>
-          </div>
-        </div>
-        
-        <div class="card hidden">
-          <div class="card-header">
-            5-day Forecast
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="date1"></h5>
-                  <p class="card-text" id="forecast1"></p>
+
+          <ul class="list-group history"></ul>
+        </aside>
+
+        <div class="col-lg-9">
+            <div class="header"><h1>Today's Forecast</h1></div>
+            <div class="card-body mt-3" id="today">
+              <!-- city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index -->
+              <p class="text-center font-weight-bold h1" id="city"></p>
+              <p class="text-center" id="icon"><img id="iconPNG" src="" /></p>
+              <p class="text-center h3" id="temp"></p>
+              <p class="text-center h3" id="humidity"></p>
+              <p class="text-center h3" id="windSpeed"></p>
+              <p class="text-center h3" id="UVIndex">
+                <span id="UVInumber"></span>
+              </p>
+            </div>
+          <div class="container show hidden">
+            <div class="header"><h1>5-day Forecast</h1></div>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" id="date1"></h5>
+                    <div class="card-text"><img id="icon1" src="" /></div>
+                    <div class="card-text" id="temp1"></div>
+                    <div class="card-text" id="humidity1"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" id="date2"></h5>
+                    <div class="card-text"><img id="icon2" src="" /></div>
+                    <div class="card-text" id="temp2"></div>
+                    <div class="card-text" id="humidity2"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" id="date3"></h5>
+                    <div class="card-text"><img id="icon3" src="" /></div>
+                    <div class="card-text" id="temp3"></div>
+                    <div class="card-text" id="humidity3"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" id="date4"></h5>
+                    <div class="card-text"><img id="icon4" src="" /></div>
+                    <div class="card-text" id="temp4"></div>
+                    <div class="card-text" id="humidity4"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" id="date5"></h5>
+                    <div class="card-text"><img id="icon5" src="" /></div>
+                    <div class="card-text" id="temp5"></div>
+                    <div class="card-text" id="humidity5"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="date2"></h5>
-                  <p class="card-text" id="forecast2"></p>
-                </div>
-              </div>
-            </div>
           </div>
-         
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="date3"></h5>
-                  <p class="card-text" id="forecast3"></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="date4"></h5>
-                  <p class="card-text" id="forecast4"></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" id="date5"></h5>
-                  <p class="card-text" id="forecast5"></p>
-                </div>
-              </div>
-            </div>
-          
-          </div>
-        </div>
         </div>
       </div>
     </div>
 
-  <script src="./javascript.js"></script>
-
-</body>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./javascript.js"></script>
+  </body>
 </html>

@@ -5,3 +5,7 @@ img{
 .hidden{
     display: none;
 }
+
+.header{
+    margin: 20px;
+}

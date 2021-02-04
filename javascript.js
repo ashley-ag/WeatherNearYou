@@ -7,77 +7,121 @@ $(document).ready(function() {
   var windSpeedText = document.querySelector('#windSpeed');
   var UVIndexText = document.querySelector('#UVIndex');
   var UVISpan = document.querySelector('#UVInumber');
-  
+  var citySearch = [];
 
+ 
 
 
 $("#search-button").on("click", function() {
-//take the input from the search bar and fetch the data from open weather
 
-addEventListener("click", function(){
-  var name = nameInput.value;
+  fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
+  .then(response => response.json())
+  //.then(data => console.log(data))
+  .then(data => {
+  var cityVal = data.name;
+  var iconVal = data.weather[0].icon;
+  var tempVal = data.main.temp; 
+  var humidityVal = data.main.humidity;
+  var windSpeedVal = data.wind.speed;
+  var iconLink = "http://openweathermap.org/img/w/" + iconVal + ".png"
+  var long = data.coord.lon;
+  var lat = data.coord.lat;
 
-  var newLocalStorageEntry = {
-      citySearch: searchInput.value,
-  };
-
-//present todays weather data for specific city in the today card
-fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
-    .then(response => response.json())
-    //.then(data => console.log(data))
-    .then(data => {
-    var cityVal = data['name'];
-    var iconVal = data['weather'][0]['icon'];
-    var tempVal = data['main']['temp']; 
-    var humidityVal = data['main']['humidity'];
-    var windSpeedVal = data['wind']['speed'];
-    var iconLink = "http://openweathermap.org/img/w/" + iconVal + ".png"
-    var long = data['coord']['lon'];
-    var lat = data['coord']['lat'];
-
-    cityText.textContent = cityVal;
-    $('#iconPNG').attr('src', iconLink);
-    tempText.textContent = "Temperature: " + tempVal + "° F";
-    humidityText.textContent = "Humidity: " + humidityVal + "%";
-    windSpeedText.textContent = "Wind Speed: " + windSpeedVal + " MPH";
+  cityText.textContent = cityVal;
+  $('#iconPNG').attr('src', iconLink);
+  tempText.textContent = "Temperature: " + tempVal + "° F";
+  humidityText.textContent = "Humidity: " + humidityVal + "%";
+  windSpeedText.textContent = "Wind Speed: " + windSpeedVal + " MPH";
 
 //present 5 day forecast in forecast card
 fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
-    .then(response => response.json())
-   //.then(data => console.log(data))
-   .then(data => {
-     
+  .then(response => response.json())
+//.then(data => console.log(data))
+ .then(data => {
+   console.log(data);
+  // the date, an icon representation of weather conditions, the temperature, and the humidity  
+    for(i=0; i < 5; i++) {
+
+    var date = moment.unix(data.daily[i+1].dt).format("dddd, MMMM Do YYYY");
+    var icon5 = data.daily[i].weather[0].icon;
+    var temp5 = data.daily[i].temp.day;
+    var hum5 = data.daily[i].humidity;
+    var idNumber = i + 1;
+    var dateFore5 = document.getElementById("date" + idNumber);
+    var iconFore5 = document.getElementById("icon" + idNumber);
+    var tempFore5 = document.getElementById("temp" + idNumber);
+    var humFore5 = document.getElementById("humidity" + idNumber);
+    var icon5Show = "http://openweathermap.org/img/w/" + icon5 + ".png"
     
-    // the date, an icon representation of weather conditions, the temperature, and the humidity  
-      for(i=0; i > 4; i++) {
+    $(".show").removeClass("hidden");
 
-      var date = new Date();
-      var icon5 = data['daily'][i]['weather'][i]['icon'];
-      var temp5 = data['daily'][i]['temp']['day'];
-      var hum5 = data['daily'][i]['humidity'];
-      var dateFore5 = document.getElementById("date" + [i]);
-      var forecastFore5 = document.getElementById("forecast" + [i]);    
+    dateFore5.textContent = date;
+    iconFore5.setAttribute('src', icon5Show);
+    tempFore5.textContent = "Temperature: " + temp5;
+    humFore5.textContent = "Humidity: " + hum5;
+
+    } 
+})
+})
+
+})
+
+
+
+
+// function displayWeatherData() {
+// fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
+//     .then(response => response.json())
+//     //.then(data => console.log(data))
+//     .then(data => {
+//     var cityVal = data.name;
+//     var iconVal = data.weather[0].icon;
+//     var tempVal = data.main.temp; 
+//     var humidityVal = data.main.humidity;
+//     var windSpeedVal = data.wind.speed;
+//     var iconLink = "http://openweathermap.org/img/w/" + iconVal + ".png"
+//     var long = data.coord.lon;
+//     var lat = data.coord.lat;
+
+//     cityText.textContent = cityVal;
+//     $('#iconPNG').attr('src', iconLink);
+//     tempText.textContent = "Temperature: " + tempVal + "° F";
+//     humidityText.textContent = "Humidity: " + humidityVal + "%";
+//     windSpeedText.textContent = "Wind Speed: " + windSpeedVal + " MPH";
+
+// //present 5 day forecast in forecast card
+// fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
+//     .then(response => response.json())
+//   //.then(data => console.log(data))
+//    .then(data => {
+//      console.log(data);
+//     // the date, an icon representation of weather conditions, the temperature, and the humidity  
+//       for(i=0; i < 5; i++) {
+
+//       var date = moment.unix(data.daily[i].dt).format("dddd, MMMM Do YYYY");
+//       var icon5 = data.daily[i].weather[0].icon;
+//       var temp5 = data.daily[i].temp.day;
+//       var hum5 = data.daily[i].humidity;
+//       var idNumber = i + 1;
+//       var dateFore5 = document.getElementById("date" + idNumber);
+//       var iconFore5 = document.getElementById("icon" + idNumber);
+//       var tempFore5 = document.getElementById("temp" + idNumber);
+//       var humFore5 = document.getElementById("humidity" + idNumber);
+//       var icon5Show = "http://openweathermap.org/img/w/" + icon5 + ".png"
       
-      $(".card").removeClass("hidden");
+//       $(".show").removeClass("hidden");
 
-      dateFore5.textContent = date;
-      forecastFore5.textContent = icon5, temp5, hum5;
+//       dateFore5.textContent = date;
+//       iconFore5.setAttribute('src', icon5Show);
+//       tempFore5.textContent = "Temperature: " + temp5;
+//       humFore5.textContent = "Humidity: " + hum5;
 
-      }
+//       } 
+// })
+// })
+// } 
 
-    })
-})
 
-//store search history
 
-//append search history in aside
-
-//make search history clickable to bring up the forecast 
-
-//
-
-})
-
-})
 
 })
