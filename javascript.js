@@ -6,7 +6,7 @@ $(document).ready(function() {
   var humidityText = document.querySelector('#humidity');
   var windSpeedText = document.querySelector('#windSpeed');
   var UVIndexText = document.querySelector('#UVIndex');
-  var citySearch = [];
+  // var citySearch = [];
 
  
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -14,22 +14,19 @@ $(document).ready(function() {
 
 $("#search-button").on("click", function() {
   displayWeatherData();
-  localStorageHistory();
+  //localStorageHistory();
 })
 
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// local storage and history buttons
+// local storage and history buttons COULDNT GET THIS TO WORK
 
-function localStorageHistory() {
-  citySearch.push(searchInput.value);
-  localStorage.setItem("cities", citySearch);
-  console.log(localsotrage.getItem(citySearch));
-
-  
-
-}
+// function localStorageHistory() {
+//   citySearch.push(searchInput.value);
+//   localStorage.setItem("cities", citySearch);
+//   console.log(localsotrage.getItem(citySearch));
+// }
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
