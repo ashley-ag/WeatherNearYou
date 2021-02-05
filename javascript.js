@@ -6,7 +6,7 @@ $(document).ready(function() {
   var humidityText = document.querySelector('#humidity');
   var windSpeedText = document.querySelector('#windSpeed');
   var UVIndexText = document.querySelector('#UVIndex');
-  //var citySearch = [];
+  var citySearch = [];
 
  
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -14,6 +14,7 @@ $(document).ready(function() {
 
 $("#search-button").on("click", function() {
   displayWeatherData();
+  localStorageHistory();
 })
 
 
@@ -21,14 +22,14 @@ $("#search-button").on("click", function() {
 
 // local storage and history buttons
 
-// function localStorageHistory() {
-//   citySearch.push(searchInput.value);
-//   localStorage.setItem("cities", JSON.stringify(citySearch));
-//   console.log(localsotrage.getItem(JSON.parse(citySearch)));
+function localStorageHistory() {
+  citySearch.push(searchInput.value);
+  localStorage.setItem("cities", citySearch);
+  console.log(localsotrage.getItem(citySearch));
 
   
 
-// }
+}
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ $("#search-button").on("click", function() {
 //Populate weather data and the forecast data
 
 function displayWeatherData() {
-  fetch('http://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=' + searchInput.value + '&units=imperial&appid=01ba96e862d6d6a63299345f7c985a13')
   .then(response => response.json())
   //.then(data => console.log(data))
   .then(data => {
@@ -46,7 +47,7 @@ function displayWeatherData() {
   var tempVal = data.main.temp; 
   var humidityVal = data.main.humidity;
   var windSpeedVal = data.wind.speed;
-  var iconLink = "http://openweathermap.org/img/w/" + iconVal + ".png"
+  var iconLink = "https://openweathermap.org/img/w/" + iconVal + ".png"
   var long = data.coord.lon;
   var lat = data.coord.lat;
 
@@ -74,7 +75,7 @@ fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + l
     var iconFore5 = document.getElementById("icon" + idNumber);
     var tempFore5 = document.getElementById("temp" + idNumber);
     var humFore5 = document.getElementById("humidity" + idNumber);
-    var icon5Show = "http://openweathermap.org/img/w/" + icon5 + ".png"
+    var icon5Show = "https://openweathermap.org/img/w/" + icon5 + ".png"
     
     $(".show").removeClass("hidden");
 
@@ -85,19 +86,15 @@ fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + l
 
     } 
 
-
+// making the UV Index show and be colorized
 var UVINumber = data.current.uvi;
-//UVINumber = 8;
 UVIndexText.textContent = "UV Index: " + UVINumber;
-
 if (UVINumber <= 2){
   UVIndexText.classList.add("lowUVI");
 }
-
 if(UVINumber <= 5){
   UVIndexText.classList.add("midUVI");
 }
-
 if(UVINumber >= 6){
   UVIndexText.classList.add("highUVI");
 }
