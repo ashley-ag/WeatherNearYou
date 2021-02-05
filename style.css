@@ -9,3 +9,15 @@ img{
 .header{
     margin: 20px;
 }
+
+.highUVI{
+    color: red;
+}
+
+.midUVI{
+    color: orange;
+}
+
+.lowUVI{
+    color: green;
+}

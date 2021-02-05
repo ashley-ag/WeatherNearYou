@@ -6,8 +6,7 @@ $(document).ready(function() {
   var humidityText = document.querySelector('#humidity');
   var windSpeedText = document.querySelector('#windSpeed');
   var UVIndexText = document.querySelector('#UVIndex');
-  var UVISpan = document.querySelector('#UVInumber');
-  var citySearch = [];
+  //var citySearch = [];
 
  
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,16 +21,14 @@ $("#search-button").on("click", function() {
 
 // local storage and history buttons
 
-function localStorageHistory() {
-  citySearch.push(searchInput.value);
-  localStorage.setItem("cities", JSON.stringify(citySearch));
+// function localStorageHistory() {
+//   citySearch.push(searchInput.value);
+//   localStorage.setItem("cities", JSON.stringify(citySearch));
+//   console.log(localsotrage.getItem(JSON.parse(citySearch)));
 
-  for(i=0; i < 5; i++) {
+  
 
-
-  }
-
-}
+// }
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -83,19 +80,32 @@ fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + l
 
     dateFore5.textContent = date;
     iconFore5.setAttribute('src', icon5Show);
-    tempFore5.textContent = "Temperature: " + temp5;
-    humFore5.textContent = "Humidity: " + hum5;
+    tempFore5.textContent = "Temperature: " + temp5 + "° F";
+    humFore5.textContent = "Humidity: " + hum5 + "%";
 
     } 
+
+
+var UVINumber = data.current.uvi;
+//UVINumber = 8;
+UVIndexText.textContent = "UV Index: " + UVINumber;
+
+if (UVINumber <= 2){
+  UVIndexText.classList.add("lowUVI");
+}
+
+if(UVINumber <= 5){
+  UVIndexText.classList.add("midUVI");
+}
+
+if(UVINumber >= 6){
+  UVIndexText.classList.add("highUVI");
+}
+
+
 })
 })
 } 
-
-
-
-
-
-
 
 //doc ready closing 
 })
